@@ -15,7 +15,3 @@ class DoubanSpider(scrapy.Spider):
         packageurls=response.xpath('//a[@rel="nofollow"]/@href').extract()
         item['search_package']=map(lambda x : re.findall(r'down/(.*)/app',x),packageurls)
         yield item
-
-
-#list=["a3aa","ooa2ass","/jump/down/com.qihoo.security/app/?f=12_0_3_0_1"]
-#print map(lambda x : re.findall(r"down/(.*)/app",x),list)
