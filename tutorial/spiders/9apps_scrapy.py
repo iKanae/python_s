@@ -17,14 +17,3 @@ class DoubanSpider(scrapy.Spider):
         packageurls=response.xpath('//a[@rel="nofollow"]/@href').extract()
         item['search_package']=map(lambda x : re.findall(r'down/(.*)/app',x),packageurls)
         yield item
-
-    def __init__(self):
-        self.headers=HEADER
-        self.cookies=COOKIES
-
-    def start_requests(self):
-        for i,url in enumerate(self.start_urls):
-	    yield FormRequest(url,meta={"cookiejar":1},
-		                    headers=self.headers,
-		                    cookies=self.cookies,
-                            callback=self.parse_item)

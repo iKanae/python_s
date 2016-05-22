@@ -40,20 +40,6 @@ COOKIES_ENABLED = True
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-HEADER = {
-    'Accept': '*/*',
-    'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
-    'Cache-Control':'no-cache',
-    'Connection':'keep-alive',
-    'Content-Length':'107',
-    'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
-    'Host':'www.zhihu.com',
-    'Pragma':'no-cahce',
-    'Referer':'http://www.zhihu.com/',
-    'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:42.0) Gecko/20100101 Firefox/42.0',
-    'X-Requested-With':'XMLHttpRequest',
-    'Accep-Encoding':'gzip,deflate',
-}
 COOKIES={"_ga":r"GA1.2.935939982.1450617254",
         "q_c1":r"6a4c93ab51184adf8d36b544e8b164bf|1463803459000|1463803459000",
         "_za":r"ace8c159-73dd-4811-ac94-3798fbdf519f",

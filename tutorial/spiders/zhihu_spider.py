@@ -5,7 +5,7 @@ import re
 from scrapy.http import Request,FormRequest
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from tutorial.settings import *
-# -*- coding:utf-8 -*-
+
 class ZhihuSpider(scrapy.Spider):
     name="zhihu"
     allowd_domains=["zhihu.com"]
