@@ -8,6 +8,60 @@ service_args = [
  ]
 driver=webdriver.PhantomJS(service_args=service_args)
 
+def getData():
+    categorylist=['ANDROID_WEAR',
+                  'BOOKS_AND_REFERENCE',
+                  'BUSINESS',
+                  'COMICS',
+                  'COMMUNICATION',
+                  'EDUCATION',
+                  'ENTERTAINMENT',
+                  'FINANCE',
+                  'HEALTH_AND_FITNESS',
+                  'LIBRARIES_AND_DEMO',
+                  'LIFESTYLE',
+                  'MEDIA_AND_ViDEO',
+                  'MEDICAL',
+                  'MUSIC_AND_AUDIO',
+                  'NEWS_AND_MAGAZINES',
+                  'PERSONALIZATION',
+                  'PHOTOGRAPHY',
+                  'PRODUCTIVITY',
+                  'SHOPPING',
+                  'SOCIAL',
+                  'SPORTS',
+                  'TOOLS',
+                  'TRANSPORTATION',
+                  'TRAVEL_AND_LOCAL',
+                  'WEATHER',
+                  'GAME_ACTION',
+                  'GAME_ADVENTURE',
+                  'GAME_ARCADE',
+                  'GAME_BOARD',
+                  'GAME_CARD',
+                  'GAME_CASINO',
+                  'GAME_CASUAL',
+                  'GAME_EDUCATIONAL',
+                  'GAME_MUSICAL',
+                  'GAME_PUZZLE',
+                  'GAME_RACING',
+                  'GAME_ROLE_PLAYING',
+                  'GAME_SIMULATION',
+                  'GAME_SPORTS',
+                  'GAME_STRATEGY',
+                  'GAME_WORD',
+                  'GAME_TRIVIA'
+                  ]
+    for category in categorylist:
+        url="https://play.google.com/store/apps/category/"+category
+        driver.get(str(url))
+        driver.maximize_window()
+        time.sleep(1)
+        collections=driver.find_elements_by_xpath("//a[contains(@href, 'collection')]")
+        for collection in collections:
+            print category+','+collection.text+','+collection.get_attribute('href')
+    return 0
+
 def getUrl(url):
     urllist=[]
     f=file(url,"r+")
