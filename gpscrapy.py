@@ -1,12 +1,17 @@
 #-*- coding: utf-8 -*-
 from selenium import webdriver
 import time
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 from selenium.webdriver.common.proxy import *
 service_args = [
- '--proxy=localhost',
- '--proxy-type=socks5',
+ '--proxy=',
+ '--proxy-type=http',
  ]
-driver=webdriver.PhantomJS(service_args=service_args)
+#driver=webdriver.PhantomJS(service_args=service_args)
+driver=webdriver.PhantomJS()
 
 def getData():
     categorylist=['ANDROID_WEAR',
@@ -56,11 +61,12 @@ def getData():
         url="https://play.google.com/store/apps/category/"+category
         driver.get(str(url))
         driver.maximize_window()
-        time.sleep(1)
-        collections=driver.find_elements_by_xpath("//a[contains(@href, 'collection')]")
+        time.sleep(5)
+        collections=driver.find_elements_by_xpath("//a[contains(@href, '/apps/category')]")
         for collection in collections:
             print category+','+collection.text+','+collection.get_attribute('href')
     return 0
+
 
 def getUrl(url):
     urllist=[]
@@ -73,13 +79,18 @@ def getUrl(url):
 
 def getResult(alllist):
     for result in alllist:
-        f=file('result.txt','a')
-        f.write(result[0]+','+result[1]+'\n')
+        f=file('results.txt','a')
+        print result[0],",",result[1]
+        try:
+            f.write(unicode(result[0]).encode('utf-8')+','+unicode(result[1]).encode('utf-8')+'\n')
+        except Exception:
+            continue
     return 0
 
 def getPkg(urllist):
     alllist=[]
     for keyurl in urllist:
+        blist=[]
         title=keyurl[0]
         url=keyurl[1]
         driver.get(str(url))
@@ -89,6 +100,8 @@ def getPkg(urllist):
         pkglist=getAll(pkgs)
         for pkg in pkglist:
             alllist.append([title,pkg])
+            blist.append([title,pkg])
+        getResult(blist)
     return alllist
 
 def getAll(pkgs):
@@ -98,7 +111,8 @@ def getAll(pkgs):
             linklist.append(url.get_attribute("href"))
     return linklist
 
+
 urllist=getUrl('data.txt')
 alllist=getPkg(urllist)
-getResult(alllist)
+#getResult(alllist)
 driver.close()
